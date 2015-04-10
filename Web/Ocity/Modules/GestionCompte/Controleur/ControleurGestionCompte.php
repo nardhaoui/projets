@@ -10,7 +10,6 @@ class ControleurGestionCompte extends ControleurGenerique {
     function defaultFunc() {
 	require_once ("Modules/GestionCompte/Vue/VueGestionCompte.php");
 	require_once ("Modules/GestionCompte/Modele/UserInfo.php");
-
 	$this->constructView("VueGestionCompte", "display_infoUser", array(UserInfo::getUserinfos()));
     }
 

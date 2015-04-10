@@ -1,0 +1,13 @@
+<?php
+
+class ModNameControleurDefault extends ControleurGenerique
+{
+	function defaultFunc()
+	{
+		require_once ("Modules/ModName/Vue/nomVue.php");
+		require_once ("Modules/ModName/Modele/nomModele.php");
+		$defaultText = nomModModelDefault::getDefaultText();
+		$this->constructView("ModNameVueDefault", "addDefault", array($defaultText));
+	}
+
+}

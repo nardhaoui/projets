@@ -1,0 +1,31 @@
+<?php
+class VueGrade {
+	static function display_modifGrade($joueur, $grades){
+		?>
+		<div id='SumBatiments'>
+			<div class="SumBatiments PartieSite">
+				<h2>Modification de grade</h2>
+				<div class='ContenuSite'>					
+					<form method="post" action="index.php?module=adminpan&action=grade">
+						<label for="grades" title="Nouveau grade">Selectionner un nouveau grade</label>
+						<select name="grades">
+						<?php
+						while($current = $grades->fetch()) {
+							echo "<option value='" . $current['idGrade'] . "'>" . $current['nom'] . "</option>";
+						}
+						?>
+						</select><br/>
+						<input type="submit" value="Changer le grade de <?php echo $joueur['pseudo']; ?>" />
+						<input type="hidden" name="idCompte" value=<?php echo $joueur['idCompte']; ?> /> 
+						<br />
+						<br />
+						<p>Vous avez changé d'avis ? <a href="index.php?module=adminpan">Je retourne à la liste des joueurs.</a></p>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+		<?php
+	}
+}

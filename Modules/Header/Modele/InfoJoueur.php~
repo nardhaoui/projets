@@ -1,0 +1,34 @@
+<?php 
+
+class InfoJoueur {
+	private $pseudo;
+	private $nomVille;
+
+	function __construct(){
+		require_once 'utils/utilisateur.php';
+		require_once 'utils/dbmapper.php';
+
+		$rqt = DBMapper::$database->prepare('SELECT pseudo from Compte WHERE idCompte = ?');		
+		$rqt->execute(array(User::$idCompte));
+		$res = $rqt->fetch();
+		
+		$this->pseudo = $res['pseudo'];
+		
+		$rqt = DBMapper::$database->prepare('SELECT nom from Ville WHERE idVille = ?');		
+		$rqt->execute(array(User::$idVille));
+		$res = $rqt->fetch();
+		
+		$this->nomVille = $res['nom'];		
+		
+	}
+
+	function getPseudo(){
+		return $this->pseudo;
+	}
+
+	function getNomVille(){
+		return $this->nomVille;
+	}
+}
+
+?>

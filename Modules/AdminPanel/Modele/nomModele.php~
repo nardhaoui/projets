@@ -1,0 +1,13 @@
+<?php 
+class  Joueurs extends DBMapper { 
+	/**
+	 * Retourne la liste des joueurs.
+	 *	$premierJoueur et $dernierJoueur sont les limites (sql : LIMIT $premierJoueur, $dernierJoueur).
+	 */
+	function getListeJoueur($premierJoueur, $dernierJoueur){
+		$rqt = self::$database->prepare("SELECT * from Compte LIMIT ?, ?");
+		$rqt->execute(array($premierJoueur, $dernierJoueur));
+	}
+}
+
+?>

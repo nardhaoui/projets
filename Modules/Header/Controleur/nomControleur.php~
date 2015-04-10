@@ -1,0 +1,10 @@
+<?php
+
+class HeaderControleur extends ControleurGenerique{
+	function defaultFunc(){
+		require_once ("Modules/ModName/Vue/VueHeader.php");
+
+		$this->constructView("VueHeader", "display_pasConnecte", array(NULL));
+	}
+
+}

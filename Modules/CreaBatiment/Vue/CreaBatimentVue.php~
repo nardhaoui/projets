@@ -1,0 +1,42 @@
+<?php
+
+class CreaBatimentVue {
+
+    static function affDemande($listeTypoBat) {
+        //TODO afficher popup avec demande
+        ?>
+        <div id='SumBatiments'>
+            <div class="SumBatiments PartieSite">
+                <h2>Création d'un batiment</h2>
+                <div class='ContenuSite'>
+                    <form method="POST" action="index.php?module=creabatiment&action=confirm">
+                        <label for="typoBat">Batiment</label>
+                        <select name='typoBat' required>
+                            <?php
+                            for ($i = 0; $i < count($listeTypoBat); $i++) {
+                                echo "<option>" . $listeTypoBat[$i] . "</option>";
+                            }
+                            ?>
+                        </select><br/>
+                        <label for="posX">Position X</label>
+                        <input type='number' placeholder="Position 0 - 99" name='posX' maxlength="3" required/><br/>
+                        <label for="posY">Position Y</label>
+                        <input type='number' placeholder="Position 0 - 99" name='posY' maxlength="3" required/><br/>
+                        <label for="nomBat">Nom (facultatif)</label>
+                        <input type='text' placeholder="Mon batiment trop cool" maxlength="20" name='nomBat'/><br/>
+                        <label>Niveau (auto)</label>
+                        <input type='text' value="Niveau 1" disabled="true"/><br/>
+                        <input type='submit' value='Je créé ce batiment' />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <?php
+    }
+
+    static function affConfirmation() {
+        Confirm::display("Le batiment a été créé");
+    }
+
+}

@@ -1,0 +1,18 @@
+<?php
+
+class HeaderControleur extends ControleurGenerique {
+	
+	function display(){
+		require_once ("Modules/Header/Vue/VueHeader.php");
+		
+		if(!User::isConnected())
+			$this->constructView("VueHeader", "display_Connecte", array(NULL));
+		else {
+			require_once 'Modules/Header/Modele/InfoJoueur.php';
+			$joueur = new InfoJoueur();
+			$this->constructView("VueHeader", "display_connecte", array($joueur->getPseudo(), $joueur->getNomVille()));
+		}
+
+	}
+
+}

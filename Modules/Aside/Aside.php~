@@ -1,0 +1,12 @@
+<?php
+class Aside extends ModuleGenerique {
+	
+	function __construct(){
+		include_once 'Modules/Aside/Controleur/ControleurAside.php';
+		$this->controleur = new ControleurAside();		
+		
+	}
+
+
+}
+	

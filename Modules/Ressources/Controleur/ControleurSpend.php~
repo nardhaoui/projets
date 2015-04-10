@@ -1,0 +1,14 @@
+<?php
+
+/**
+ *	CECI EST UN CONTROLEUR DE DEBUG
+ */
+class ControleurSpend extends ControleurGenerique {
+	
+	function spend(){
+		require_once('Modules/Ressources/Modele/UtilisationRessources.php');
+		
+		echo UtilisationRessources::spendRMoney(1, 1000);	
+	}
+
+}

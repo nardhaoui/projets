@@ -1,0 +1,15 @@
+<?php 
+class ressources{
+	
+	/**  
+	 *	Renvoie les ressources d'une ville sous le format array(argent, population).
+	 */
+	function getRessources($idVille){
+			$rqt = DBMapper::$database->prepare('SELECT argent, population from Ville WHERE idVille = ?');
+			$rqt->execute(array($idVille));
+			return array($rqt['argent'], $rqt['population']);
+		
+	}
+}
+
+?>

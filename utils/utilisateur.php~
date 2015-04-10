@@ -1,0 +1,95 @@
+<?php
+class User extends DBMapper{
+	public static $isConnected;
+	public static $idCompte;
+	public static $idVille;
+
+	//Permet d'initialiser la classe user 
+	// init():void
+	static function init($deco = 0){
+		$connect = self::isConnected();
+		if($connect===false){
+			self::$isConnected=false;
+			self::$idCompte=0;
+		}else{
+			self::$isConnected = true;
+			self::$idCompte=$connect;
+			self::$idVille = self::getIdVille();
+		}
+	
+	}
+	// permet de savoir si un utilisateur est admin
+	// isAdmin():boolean
+	static function isAdmin() {
+		if(!self::$isConnected){
+			return false;	
+		}
+		$select = self::$database->prepare("SELECT * FROM Compte INNER JOIN Grade ON Compte.idGrade = Grade.idGrade where Compte.idCompte = ?");
+		$select->execute(array(self::$idCompte));
+		if($res = $select->fetch()){
+			return TRUE;
+		}
+		return FALSE;
+	}
+	
+	//permet de savoir si une personne est connecté (ne pas utiliser)-> utiliser User::$isConnected
+	// isConnected():boolean / idUser:int
+	static function isConnected(){
+		if(empty($_SESSION['user'])){
+			return FALSE;
+		}
+		$args = explode("--",$_SESSION['user']);
+		if(count($args)==2){
+			return $args[0];
+		}
+		return FALSE;
+	}
+	
+	// permet de savoir si un utilisateur est depute
+	// param: id de la region (si vite renvoie l'id de la region ou il es depute)
+	// isDepute(idRegion = -1):boolean / idRegion:int
+	static function isDepute($region = -1) {
+		if(!self::$isConnected){
+			return FALSE;
+		}
+		if($region!=-1){
+			$select = self::$database->prepare("SELECT depute FROM Region WHERE id = ? AND depute = ?");
+			$select->execute(array($region, self::$idCompte));
+		}else{
+			$select = self::$database->prepare("SELECT id FROM Region WHERE depute = ?");
+			$select->execute(array(self::$idCompte));
+		}
+		
+		if($res = $select->fetch()){
+			if($region == -1)
+				return $res['id'];
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Retourne l'idVille de joueur connecté.
+	 */
+	static private function getIdVille(){
+		$select = self::$database->prepare("SELECT idVille FROM Compte WHERE idCompte = ?");
+		$select->execute(array(self::$idCompte));
+		$res = $select->fetch();
+
+		return $res['idVille'];
+	}
+	
+	/**
+	 * Detruit toutes traces de vie. Comparable à la solution final mais pour ta session.
+	 */
+	static function deconnexion(){
+		self::$isConnected = FALSE;
+		self::$idCompte = NULL;
+		self::$idVille = NULL;
+		$_SESSION['user'] = NULL;
+		session_destroy();
+	}
+
+
+
+}

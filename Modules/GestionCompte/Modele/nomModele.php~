@@ -1,0 +1,8 @@
+<?php 
+class nomModModelDefault{
+	function getUserPseudo(){
+		return "TODO";
+	}
+}
+
+?>

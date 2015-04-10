@@ -1,0 +1,44 @@
+
+
+form:not(.formResume) {
+    margin:auto;
+    width:500px;
+}
+
+label {
+    display:inline-block;
+    width: 228px;
+    padding:10px;
+    border-left:1px dashed rgba(128,128,128,0.2);
+}
+
+form:not(.formResume) input, select {
+    width: 228px;
+    padding:8px;
+    border:1px solid rgba(128,128,128,0.5);
+}
+
+form input:focus {
+    border:1px dashed rgba(128,128,255,0.5);
+}
+
+form:not(.formResume) input[type='submit'] {
+    background: linear-gradient(top, rgba(25,95,250,1) 0%, rgba(25,95,250,1) 50%, rgba(10,80,235,1) 50%, rgba(10,80,235,1) 100%);
+    background: -moz-linear-gradient(top, rgba(25,95,250,1) 0%, rgba(25,95,250,1) 50%, rgba(10,80,235,1) 50%, rgba(10,80,235,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(25,95,250,1) 0%, rgba(25,95,250,1) 50%, rgba(10,80,235,1) 50%, rgba(10,80,235,1) 100%);
+    border:none;
+    margin:5px;
+    margin-left:125px;
+    width: 250px;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2), 0px 0px 10px rgba(255, 255, 255, 0.2) inset;
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.4);
+    transition:0.4s;
+}
+
+form:not(.formResume) input[type='submit']:hover {
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(255, 255, 255, 0.5) inset;
+}

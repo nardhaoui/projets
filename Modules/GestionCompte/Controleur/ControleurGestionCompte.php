@@ -1,0 +1,41 @@
+<?php
+
+if (!defined('SECURE')) {
+    die('Acces direct interdit !<br/>'
+    . 'Non mais oh !');
+}
+
+class ControleurGestionCompte extends ControleurGenerique {
+
+    function defaultFunc() {
+	require_once ("Modules/GestionCompte/Vue/VueGestionCompte.php");
+	require_once ("Modules/GestionCompte/Modele/UserInfo.php");
+
+	$this->constructView("VueGestionCompte", "display_infoUser", array(UserInfo::getUserinfos()));
+    }
+
+    function changementMDP() {
+	require_once ("Modules/GestionCompte/Modele/UserInfo.php");
+	require_once ("Modules/GestionCompte/Vue/VueGestionCompte.php");
+
+	$oldMDP = sha1($_POST['passe']);
+	$newMDP = sha1($_POST['Newpasse']);
+	$confMDP = sha1($_POST['Confpasse']);
+	$codeNotice = 0;
+
+
+	if ($_POST['passe'] != "" && $_POST['Newpasse'] != "" && $_POST['Confpasse'] != "") {
+	    if (UserInfo::correctMDP($oldMDP)) {
+		if ($newMDP == $confMDP) {
+		    UserInfo::changeMDP($newMDP);
+		    $codeNotice = 2;
+		} else
+		    $codeNotice = 3;
+	    } else
+		$codeNotice = 1;
+	} else
+	    $codeNotice = 4;
+	$this->constructView("VueGestionCompte", "display_infoUser", array(UserInfo::getUserinfos(), $codeNotice));
+    }
+
+}

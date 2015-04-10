@@ -1,0 +1,28 @@
+<?php
+
+if (!defined('SECURE')) {
+    die('Acces direct interdit !<br/>'
+    . 'Non mais oh !');
+}
+
+class ResumeBatiments extends ModuleGenerique {
+
+    function __construct() {
+	$this->titre = "Resumé Batiments";
+
+	$action = isset($_GET['action']) ? $_GET['action'] : 'DEFAULT';
+
+	require_once 'Modules/ResumeBatiments/Controleur/ControleurResumeBatiments.php';
+	$this->controleur = new ControleurResumeBatiments();
+
+	switch ($action) {
+	    case "displaytypo" :
+		$this->controleur->display_typoBat();
+		break;
+	    default :
+		$this->controleur->defaultFunc();
+		break;
+	}
+    }
+
+}

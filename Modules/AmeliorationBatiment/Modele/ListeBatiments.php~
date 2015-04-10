@@ -1,0 +1,17 @@
+<?php
+class ListeBatiments {
+	
+	static function getListeBat($idVille){
+		if(empty($idVille)){
+			Error::postError("idVille");
+			return false;
+		}
+		else{
+			$rqt = DBMapper::$database->prepare('SELECT * FROM Batiments as b, TypoBatiments as t WHERE idVille = ? AND b.typoBat = t.idType');
+			$rqt->execute(array($idVille));
+			return $rqt;
+		}
+
+	}
+
+}

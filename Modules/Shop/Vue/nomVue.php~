@@ -1,0 +1,10 @@
+<?php
+class ModNameVueDefault
+{
+	static function addDefault($text)
+	{
+		echo "<h1>$text</h1>";
+	
+	}
+
+} 

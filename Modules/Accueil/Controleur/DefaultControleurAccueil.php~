@@ -1,0 +1,11 @@
+<?php
+
+class DefaultControleurAccueil extends ControleurGenerique {
+	function defaultFunc(){
+		require_once 'Modules/Accueil/Vue/VueAccueil.php';
+		require_once 'Modules/Ressources/Ressources.php';
+
+		$this->constructView("VueAccueil", "display_accueil", array());
+	}
+
+}

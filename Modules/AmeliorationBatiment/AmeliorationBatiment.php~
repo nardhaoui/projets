@@ -1,0 +1,34 @@
+<?php
+
+class AmeliorationBatiment extends ModuleGenerique{
+	
+	function __construct(){
+		require_once 'Modules/AmeliorationBatiment/Controleur/ControleurListBat.php';
+		
+		$this->titre = 'Amelioration de Batiments';
+		$action = isset($_GET['action']) ? $_GET['action'] : 'DEFAULT';
+		
+		
+		switch($action){
+			case "d_batlist":
+				$this->controleur = new ControleurListBat();
+				$this->controleur->display_BatList();
+				break;
+			case "amelioration":
+				$this->controleur = new ControleurListBat();
+				$this->controleur->ameliorerBat();
+				break;
+			case "demo":
+				$this->controleur = new ControleurListBat();
+				$this->controleur->demoBat();
+				break;
+			default:
+				$this->controleur = new ControleurListBat();
+				$this->controleur->display_BatList();
+				break;
+		}
+
+	}
+
+
+}

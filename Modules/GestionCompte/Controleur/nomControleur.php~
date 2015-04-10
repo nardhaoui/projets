@@ -1,0 +1,11 @@
+<?php
+
+class ControleurGestionCompte extends ControleurGenerique {
+	function defaultFunc(){
+		require_once ("Modules/GestionCompte/Vue/nomVue.php");
+		require_once ("Modules/GestionCompte/Modele/UserInfo.php");
+		$defaultText = UserInfo::getUserInfo();
+		$this->constructView("ModNameVueDefault", "addDefault", array($defaultText));
+	}
+
+}

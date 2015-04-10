@@ -1,0 +1,42 @@
+<?php
+
+class VueAmelioration {
+
+    static function display_DemandeAmelioration($idBat) {
+        if (empty($idBat)) {
+            Error::postError("idBat");
+            return false;
+        } else {
+            require_once ("Modules/AmeliorationBatiment/Modele/Batiment.php");
+            $bat = Batiment::getBat($idBat);
+            ?>
+            <div id='SumBatiments'>
+                <div class="SumBatiments PartieSite">
+                    <h2>Amélioration d'un batiment</h2>
+                    <div class='ContenuSite'>
+                        <form action="index.php" methode="GET">
+                            <input type="hidden" name="module" value="amelbat" />
+                            <input type="hidden" name="action" value="amelioration" />
+                            <input type="hidden" name="idbat" value=<?php echo $idBat ?> />
+                            <p>Voulez vous réellement améliorer <?php echo $bat['nom'] . ' pour $' . Batiment::getPrix($idBat) ?></p>
+                            <input type="radio" name="yesNo" value=1 checked />Oui
+                            <input type="radio" name="yesNo" value=0 />Non
+                            <input type="submit" value="Ok" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+        }
+    }
+
+    static function display_AmeliorationOk() {
+        Confirm::display("Amélioration effectuée");
+    }
+
+    static function display_AmeliorationKo() {
+        Error::erreur("Echec de l'amélioration");
+    }
+
+}

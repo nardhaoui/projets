@@ -1,0 +1,10 @@
+<?php
+class ModNameVueDefault {
+	
+	static function display_Menu(){
+		?>
+		<a href="index.php?module=amelbat&action=idvilleselector">Afficher les batiments</a>
+		<?php
+	}
+
+} 

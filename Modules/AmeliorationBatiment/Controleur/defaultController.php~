@@ -1,0 +1,13 @@
+<?php
+
+class AmeliorationBatimentControleurDefault extends ControleurGenerique{
+	
+	function defaultFunc(){
+				echo "<h1>Amelioration Batiment lancé</h1>";
+		require_once ("Modules/AmeliorationBatiment/Vue/VueDefault.php");
+		
+		$this->constructView("VueDefault", "display_Menu", array(NULL));
+		
+	}
+
+}

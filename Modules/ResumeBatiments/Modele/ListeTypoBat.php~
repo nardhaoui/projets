@@ -1,0 +1,19 @@
+<?php 
+class ListeTypoBat extends DBMapper {
+	
+	static function getListeTypo(){
+		$rqt = self::$database->prepare("SELECT * FROM TypoBatiments");
+		$rqt->execute(array(NULL));
+		
+		return $rqt;
+	}
+
+	static function getTypo($idTypo){
+		$rqt = self::$database->prepare("SELECT * FROM TypoBatiments WHERE idType = ?");
+		$rqt->execute(array($idTypo));
+		
+		return $rqt;
+	}
+}
+
+?>

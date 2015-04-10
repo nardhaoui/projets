@@ -1,0 +1,29 @@
+<?php
+class VueBans {
+	static function display_listeJoueurs($joueurs) {
+		?>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>PSEUDO</th>
+				<th>EMAIL</th>
+			</tr>
+		<?php
+		while($res = $joueurs->fetch()){
+		?>
+			<tr>
+				<td><?php echo $res['idCompte']; ?></td>
+				<td><?php echo $res['pseudo']; ?></td>
+				<td><?php echo $res['email']; ?></td>
+			</tr>
+		<?php
+		}
+		
+		?>
+		</table>
+		<?php
+		
+	
+	}
+
+} 

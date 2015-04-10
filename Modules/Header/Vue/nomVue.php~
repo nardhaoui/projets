@@ -1,0 +1,12 @@
+<?php
+class VueHeader{
+	static function display_connecte(){
+
+	
+	}
+	
+	static function display_pasConnecte(){
+
+	}
+
+} 

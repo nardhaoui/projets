@@ -1,0 +1,13 @@
+<?php 
+class ModeleShop extends DBMapper{
+
+	static function addMoney($idJoueur){
+		// TODO
+	}
+	
+	static function addHistorique(){
+		// TODO
+	}
+}
+
+?>

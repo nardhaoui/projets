@@ -1,0 +1,43 @@
+<?php
+
+class VueAccueil {
+
+    static function display_accueil($bats, $ville) {
+        require_once 'Modules/Ressources/Ressources.php';
+        ?>
+        <!--INTERFACE DE JEU-->
+        <section>
+            <!--Ecran de Jeu-->
+            <div class="EcranDeJeu PartieSite">
+                <h2><?php echo $ville; ?></h2>	
+                <div class='ContenuSite'>
+                    <img src="images/grilleiso.png" alt="Grille du jeu"/>
+                    <?php
+                    $espaceX = 100;
+                    $espaceY = 70;
+                    $tailleX = 100;
+                    $tailleY = 54;
+                    foreach ($bats as $cle => $value) {
+                        $X = $espaceX + ($value['positionX'] ) * $tailleX + ($tailleX * ($value['positionY'] % 2)) / 2;
+                        $Y = $espaceY + ($value['positionY'] ) * ($tailleY / 2);
+                        $value['positionX'] ++;
+                        $value['positionY'] ++;
+                        ?>
+					<div class="batiments" style="width:98px;height:50px;position:absolute;left:<?php echo $X; ?>px;top:<?php echo $Y; ?>px;">
+						<a href="index.php?module=amelbat&action=infosbat&id=<?php echo $value['idBat']?>">
+							<img style="width:98px;position:absolute;bottom:0px;right:0px;" src="<?php echo $value["image"]; ?>" title="<?php echo "batiment" . ($cle + 1) . " pos[" . $value['positionX'] . ":" . $value['positionY'] . "]"; ?>" alt="<?php echo "batiment" . ($cle + 1) . " pos[" . $value['positionX'] . ":" . $value['positionY'] . "]"; ?>"/> 
+						</a>
+					</div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+        </section>
+
+        <?php
+    }
+
+}

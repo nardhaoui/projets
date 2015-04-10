@@ -1,0 +1,40 @@
+<?php
+class VueGestionCompte {
+	static function display_infoUser($infos, $codeNotice = 0){
+		echo "<h1>Pseudo : " . $infos[0] . "</h1>";
+		echo "<h1>Email : " . $infos[1] . "</h1>";
+		?>
+			<form method="post" action="index.php?module=gestcompte&action=mdp">
+				<label for="passe">Mot de passe actuel</label>
+				<input type="password" name="passe" id="passe" placeholder="Actuel"/><br/>
+				<label for="Newpasse">Nouveau mot de passe</label>
+				<input type="password" name="Newpasse" id="passe" placeholder="Nouveau"/><br/>
+				<label for="Confpasse">Nouveau mot de passe confirmation</label>
+				<input type="password" name="Confpasse" id="passe" placeholder="Confirmation"/><br/>
+				<input type="submit" value="Je change de mot de passe"/><br/>
+			</form>
+		<?php
+		
+		switch($codeNotice){
+			case 1:
+				?>
+				<h3>L'ancien mot de passe n'est pas Bon.</h3>
+				<?php
+				break;
+			case 2:
+				?>
+				<h3>Changement de mot de passe effectué.</h3>
+				<?php
+				break;
+			case 3:
+				?>
+				<h3>Les deux nouveaux mot de passe ne sont pas les mêmes.</h3>
+				<?php
+				break;
+		
+		}
+	
+	}
+	
+
+} 

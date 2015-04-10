@@ -1,0 +1,3 @@
+<?php
+
+$NBRESSOURCES = 2;

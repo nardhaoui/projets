@@ -1,0 +1,11 @@
+<?php
+class Ressources extends ModuleGenerique{
+	function __construct(){
+
+		
+		require_once 'Modules/Ressources/Controleur/ControleurRessources.php';
+		$this->controleur = new ControleurRessources();
+	}
+
+}
+	

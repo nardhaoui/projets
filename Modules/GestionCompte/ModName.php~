@@ -1,0 +1,19 @@
+<?php
+class GestionCompte extends ModuleGenerique {
+	function __construct(){
+		$this->titre = "Gestion de compte";
+		$action = isset($_GET['action']) ? $_GET['action'] : 'DEFAULT';
+		
+		switch($action){
+		
+			default:
+				require_once 'Modules/ModName/Controleur/nomControleur.php';
+				$this->controleur = new ModNameControleurDefault();
+				$this->controleur->defaultFunc();
+				break;
+		}
+	}
+
+
+}
+	

@@ -1,0 +1,18 @@
+<?php
+
+class ControleurResumeBatiments extends ControleurGenerique {
+	function defaultFunc(){
+		require_once ("Modules/ResumeBatiments/Vue/VueResumeBatiments.php");
+		require_once ("Modules/ResumeBatiments/Modele/ListeTypoBat.php");
+		
+		$this->constructView("VueResumeBatiments", "display_resumeBatiments", array(ListeTypoBat::getListeTypo()));
+	}
+	
+	function display_typoBat(){
+		require_once ("Modules/ResumeBatiments/Vue/VueResumeBatiments.php");
+		require_once ("Modules/ResumeBatiments/Modele/ListeTypoBat.php");
+		echo "<h1>OK</h1>";
+		$this->constructView("VueResumeBatiments", "display_batiment", array(ListeTypoBat::getTypo($_GET['idtypo'])));
+	}
+
+}

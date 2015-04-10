@@ -1,0 +1,35 @@
+<?php
+class VueInfosBat {
+	static function display_infosBat($bat, $prod){
+		?>
+		<div id='SumBatiments'>
+			<div class="SumBatiments PartieSite">
+				<h2>Résumé du batiment</h2>
+				<div class='ContenuSite'>
+					<div class='SumBat'>
+					<?php	
+					echo "<img src='" . $bat['image'] . "' alt='thumbnail " . $bat['nom'] . "' title='thumbnail " . $bat['nom'] . "'/>";
+					echo "<h3>" . $bat['nom'] . " niveau " . $bat['lvlBat'] . "</h3>";
+					echo "<p>";
+					echo $bat['resume'];
+					echo "</p>";
+					echo "<h4>Production</h4>";
+					echo "<ul>";
+					echo "<li>Argent : " . $prod[0] . "</li>";
+					echo "<li>Eau : " . $prod[1] . "</li>";
+					echo "<li>Electricite : " . $prod[2] . "</li>";
+					echo "</ul>";
+					echo "<span class='arrangeur'></span>";
+					?>
+					<a href="index.php?module=amelbat&action=amelioration&idbat=<?php echo $bat['idBat']?>&ret=infos">Ameliorer</a>
+					<a href="index.php?module=amelbat&action=demo&idbat=<?php echo $bat['idBat']?">Detruire</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+
+}

@@ -1,0 +1,115 @@
+<?php
+
+class InscriptionVue {
+
+    static function affFormulaire($pays) {
+        ?>
+        <div id='SumBatiments'>
+            <div class="SumBatiments PartieSite">
+                <h2>Je m'inscris - étape 1/2</h2>
+                <div class='ContenuSite'>
+
+                    <!-- Formulaire d'inscription -->
+                    <form method="post" action="index.php?module=inscription&action=confirm">
+                        <label>Pseudo</label>
+                        <input type="text" name="pseudo" placeholder="Pseudonyme" pattern="^[0-z]{1,125}$" required/><br/>
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Email" pattern="^[0-z._]{1,125}@[0-z]{1,125}.[0-z]{1,5}$" required/><br/>
+                        <label>Mot de passe</label>
+                        <input type="password" name="passe1" placeholder="Mot de passe" pattern="^[0-z]{1,125}$" required/><br/>
+                        <label>Confirmation du mot de passe</label>
+                        <input type="password" name="passe2" placeholder="Mot de passe - Confirmation" pattern="^[0-z]{1,125}$" required/><br/>
+                        <label>Nom de votre nouvelle ville</label>
+                        <input type="text" name="nomville" placeholder="Nom de la ville"  pattern="^[0-z�-�-]{1,125}$" required/><br/>
+                        <label>Pays</label>
+                        <select name="pays" required>
+                            <?php
+                            foreach ($pays as $cle => $value) {
+                                echo "<option value='" . $value['id'] . "'>" . $value['nom_fr_fr'] . "--" . $value['nom_en_gb'] . "</option>";
+                            }
+                            ?>
+                        </select><br/>
+                        <input type="submit" value="Passer à l'étape suivante"/><br/>
+                    <p>Vous avez deja un compte ? <a href="index.php?module=connexion">Je me connecte</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <?php
+    }
+
+    function affEtape2($regions, $compte) {
+        ?>
+        <div id='SumBatiments'>
+            <div class="SumBatiments PartieSite">
+                <h2>Je m'inscris - étape 2/2</h2>
+                <div class='ContenuSite'>
+
+                    <style>
+                        .cache_div{
+                            display:none;
+                        }
+                        .aff_div{
+                            display:block;
+                        }
+                    </style>
+                    <form method="post" action="index.php?module=inscription&action=confirm2">
+                        <label for="creer" onClick="javascript:create();" >Créer ma région</label>
+                        <input type="radio" value="1" name="type" id="creer" onClick="javascript:create();"><br/>
+                        <label for="select" onClick="javascript:selectregion();">Choisir une ville déjà existante</label>
+                        <input type="radio" value="2" name="type" id="select" onClick="javascript:selectregion();"><br/>
+                        <div class="cache_div" id="div_creer">
+                            <label>Nom de la région:</label>
+                            <input type="text" name="regionC" placeholder="Nom de la région"/>
+                        </div>
+                        <div class="cache_div" id="div_select">
+                            <label>Choisissez une région:</label>
+                            <select name="regionS">
+                                <?php
+                                foreach ($regions as $cle => $value) {
+                                    echo "<option value='" . $value['id'] . "'>" . $value['nom'] . "</option>";
+                                }
+                                ?>
+
+                            </select><br/>
+                        </div>
+                        <?php
+                        foreach ($compte as $key => $value) {
+                            echo "<input type='hidden' value='$value' name='$key'/>";
+                        }
+                        ?>
+                        <input type="submit" value="Finir mon inscription" class="cache_div" id="inp_sub"/>
+                    </form>
+                    <script>
+                        function selectregion() {
+                            document.getElementById("div_creer").className = "cache_div";
+                            document.getElementById("div_select").className = "aff_div";
+                            document.getElementById("inp_sub").className = "aff_div";
+                        }
+                        ;
+                        function create() {
+                            document.getElementById("div_creer").className = "aff_div";
+                            document.getElementById("div_select").className = "cache_div";
+                            document.getElementById("inp_sub").className = "aff_div";
+                        }
+                        ;
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <?php
+    }
+
+    function inscrOk() {
+        ?>
+        <h3>Inscription terminée !</h3>
+        <a href="index.php">Retour à l'accueil</a>
+        <?php
+    }
+
+}

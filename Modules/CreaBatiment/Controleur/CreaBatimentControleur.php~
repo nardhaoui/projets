@@ -1,0 +1,79 @@
+<?php
+
+class CreaBatimentControleur extends ControleurGenerique {
+
+    function defaultFunc() {
+        require_once ("Modules/CreaBatiment/Vue/nomVue.php");
+        require_once ("Modules/CreaBatiment/Modele/nomModele.php");
+        $defaultText = nomModModelDefault::getDefaultText();
+        $this->constructView("CreaBatimentVue", "addDefault", array($defaultText));
+    }
+
+    function afficherDemande() {
+
+        require_once("Modules/CreaBatiment/Vue/CreaBatimentVue.php");
+        require_once("Modules/CreaBatiment/Modele/CreaBatimentModele.php");
+
+        $listeTypoBat = CreaBatimentModele::getListeTypoBat();
+
+        $this->constructView("CreaBatimentVue", "affDemande", array($listeTypoBat));
+    }
+
+    function afficherConfirm() {
+        require_once('utils/utilisateur.php');
+        require_once("Modules/CreaBatiment/Vue/CreaBatimentVue.php");
+        require_once("Modules/CreaBatiment/Modele/CreaBatimentModele.php");
+
+        Debug::active();
+
+        $respectCondition = true;
+        $idVille = User::$idVille;
+
+        if (isset($_POST['typoBat'])) {
+            $typo = $_POST['typoBat'];
+            Debug::add($typo . " reçu !");
+
+            //Verifier posX posY
+            $posXPrises = CreaBatimentModele::getListePosXPrises($idVille);
+            $posYPrises = CreaBatimentModele::getListePosYPrises($idVille);
+            $posX = $_POST['posX'];
+            $posY = $_POST['posY'];
+            if ($posX < 0 || $posX > 999 || $posY < 0 || $posY > 999) {
+                $respectCondition = false;
+            } else {
+                for ($i = 0; $i < count($posXPrises); $i++) {
+                    if ($posXPrises[$i] == $posX) {
+                        for ($j = 0; $j < count($posYPrises); $j++) {
+                            if ($posYPrises[$j] == $posY) {
+                                $respectCondition = false;
+                                Error::erreur("Position (" . $posX . ":" . $posY . ") déjà prise !");
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            //nomBat
+            if (!empty($_POST['nomBat'])) {
+                $nom = $_POST['nomBat'];
+            } else {
+                $nom = "";
+            }
+        } else {
+            $respectCondition = false;
+            Debug::add("Rien reçu ...");
+        }
+
+        //Action modèle + Affichage de la vue (ssi conditions respectées)
+        if ($respectCondition) {
+            //Insertion du nouveau batiment
+            CreaBatimentModele::insertBatiment(CreaBatimentModele::getTypoBatId($typo)[0], $posX, $posY, $nom, $idVille);
+            $this->constructView("CreaBatimentVue", "affConfirmation", array());
+        } else {
+            self::afficherDemande();
+        }
+    }
+
+}

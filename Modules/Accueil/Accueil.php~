@@ -1,0 +1,16 @@
+<?php
+class Accueil extends ModuleGenerique{
+	function __construct(){
+		
+		require_once 'Modules/Accueil/Controleur/DefaultControleurAccueil.php';
+		
+		$this->titre = 'Accueil';
+
+		$this->controleur = new ModNameControleurDefault();
+		$this->controleur->defaultFunc();
+		
+	}
+
+
+}
+	

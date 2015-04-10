@@ -1,0 +1,8 @@
+<?php 
+class nomModModelDefault{
+	function getDefaultText(){
+		return "Module Ressources.";
+	}
+}
+
+?>

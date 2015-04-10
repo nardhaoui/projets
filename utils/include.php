@@ -1,0 +1,8 @@
+<?php 
+	require_once 'utils/Constantes.php';
+	require_once 'utils/params_connexion.php';
+	require_once 'utils/dbmapper.php';
+	require_once 'utils/utilisateur.php';
+	include 'utils/ERROR_LIST.php';
+	include 'utils/INFO_LIST.php';
+

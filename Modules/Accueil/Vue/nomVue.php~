@@ -1,0 +1,8 @@
+<?php
+class VueAccueil {
+	static function display_accueil($text){
+		echo "<h1>$text</h1>";
+	
+	}
+
+} 

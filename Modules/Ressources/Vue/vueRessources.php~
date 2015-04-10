@@ -1,0 +1,45 @@
+<?php
+
+class vueRessources {
+
+    /**
+     * 	Permet d'afficher les ressources displonnibles au joueur.
+     * 	$res = array(Argent, Elec, Eau, Popul, PopMax)
+     */
+    static function display_Ressources($res) {
+        ?>
+        <!--RESSOURCES-->
+        <div class="Ressources PartieSite">
+            <h2>Ressources</h2>	
+            <div class='ContenuSite'>
+                <div class='MiniRess'>
+                    <img src="images/50x50.png" alt="Argent" title="Argent"/>
+                    <p <?php if($res[0] > 9999) echo 'class="SmallerValue"'?>>
+        <?php echo $res[0]; ?>
+                    </p>
+                </div>
+                <div class='MiniRess'>
+                    <img src="images/50x50.png" alt="Electricité" title="Electricité"/>
+                    <p>
+        <?php echo $res[1]; ?>
+                    </p>
+                </div>
+                <div class='MiniRess'>
+                    <img src="images/50x50.png" alt="Eau" title="Eau"/>
+                    <p>
+        <?php echo $res[2]; ?>
+                    </p>
+                </div>
+                <div class='MiniRess'>
+                    <img src="images/50x50.png" alt="Population" title="Population"/>
+                    <p>
+        <?php echo $res[3] . '/' . $res[4]; ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <?php
+    }
+
+}

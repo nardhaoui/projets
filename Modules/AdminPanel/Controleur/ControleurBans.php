@@ -1,0 +1,62 @@
+<?php
+
+if (!defined('SECURE')) {
+    die('Acces direct interdit !<br/>'
+	    . 'Non mais oh !');
+}
+
+class ControleurBans extends ControleurGenerique {
+
+    function banJoueur() {
+	require_once ("Modules/AdminPanel/Vue/VueBans.php");
+	require_once ("Modules/AdminPanel/Modele/Joueurs.php");
+	$idJoueur = isset($_GET['id']) ? $_GET['id'] : -1;
+	if ($idJoueur == -1) {
+	    Error::notice("Probleme avec l'id :(");
+	    $arg = Joueurs::getListeJoueurs();
+	    $this->constructView("VueBans", "display_listeJoueurs", array($arg));
+	    ;
+	} else {
+	    $arg = Joueurs::getJoueur($idJoueur);
+	    $this->constructView("VueBans", "display_formBan", array($arg));
+	}
+    }
+
+    function banConf() {
+	require_once ("Modules/AdminPanel/Modele/Joueurs.php");
+	require_once ("Modules/AdminPanel/Vue/VueListeJoueurs.php");
+	$id = $_POST['idCompte'];
+	$dateFin = $_POST['dateFin'];
+	$motif = $_POST['motif'];
+
+
+	Joueurs::bannirTempo($id, $dateFin, $motif);
+
+	Error::notice("Vous avez banni le compte $id, j'espère que vous allez pouvoir dormir en sachant que vous avez rendu quelqu'un triste.");
+
+	$arg = Joueurs::getListeJoueurs();
+	$this->constructView("VueListeJoueurs", "display_listeJoueurs", array($arg));
+    }
+
+    function display_bans() {
+	require_once ("Modules/AdminPanel/Vue/VueBans.php");
+	require_once ("Modules/AdminPanel/Modele/Joueurs.php");
+
+	$arg = Joueurs::getListeBans();
+	$this->constructView("VueBans", "display_listeBans", array($arg));
+    }
+
+    function unban() {
+	require_once ("Modules/AdminPanel/Modele/Joueurs.php");
+	require_once ("Modules/AdminPanel/Vue/VueBans.php");
+
+	$id = $_GET["id"];
+	Joueurs::unban($id);
+
+	Error::notice("Ban $id a été supprimé.");
+
+	$arg = Joueurs::getListeBans();
+	$this->constructView("VueBans", "display_listeBans", array($arg));
+    }
+
+}

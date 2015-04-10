@@ -1,0 +1,81 @@
+<?php
+class VueResumeBatiments {
+	static function display_resumeBatiments($typoBats) {
+		$typoVide = TRUE;
+	?>
+	<div id='SumBatiments'>
+			<!-- class SUM BATIMENTS -->
+			<div class="SumBatiments PartieSite">
+				<h2>Resumé des batiments</h2>
+				<div class='ContenuSite'>
+					<?php
+						while($res = $typoBats->fetch()){
+							$typoVide = FALSE;
+							echo "<div class='SumBat'>";
+							echo "<img src='" . $res['image'] . "' alt='thumbnail " . $res['nom'] . "' title='thumbnail " . $res['nom'] . "'/>";
+							echo "<h3>" . $res['nom'] . "</h3>";
+							echo "<p>";
+							echo $res['resume'];
+							echo "</p>";
+							echo "<a href='index.php?module=amelbat&action=displaytypo&idtypo=" . $res['idType'] . "'>Plus...</a>";
+							echo "</div>";
+						}
+						if($typoVide){
+						?>
+							<p>Aucun type de batiments.</p>
+						<?php
+						}
+							
+					?>
+				</div>
+			</div>
+			<!-- FIN class SUM BATIMENTS -->
+		</div>
+		<!-- FIN id SUM BATIMENTS -->
+	<?php
+	}
+
+	static function display_batiment($bat){
+		$typoVide = TRUE;		
+		?>
+		<div id='SumBatiments'>
+			<!-- class SUM BATIMENTS -->
+			<div class="SumBatiments PartieSite">
+				<h2>Resumé des batiments</h2>
+				<div class='ContenuSite'>
+					<?php
+						while($res = $bat->fetch()){
+							$typoVide = FALSE;
+							echo "<div class='SumBat'>";
+							echo "<img src='" . $res['image'] . "' alt='thumbnail " . $res['nom'] . "' title='thumbnail " . $res['nom'] . "'/>";
+							echo "<h3>" . $res['nom'] . "</h3>";
+							echo "<p>";
+							echo $res['resume'];
+							echo "</p>";
+							echo "<h4>Production</h4>";
+							echo "<ul>";
+							echo "<li>Argent : " . $res['productionArgent'] . "</li>";
+							echo "<li>Eau : " . $res['productionEau'] . "</li>";
+							echo "<li>Electricite : " . $res['productionElectricite'] . "</li>";
+							echo "</ul>";
+							echo "</div>";
+						}
+						if($typoVide){
+						?>
+							<p>Aucun batiment de ce type.</p>
+						<?php
+						}
+							
+					?>
+				</div>
+			</div>
+			<!-- FIN class SUM BATIMENTS -->
+		</div>
+		<!-- FIN id SUM BATIMENTS -->
+		
+
+		<?php
+
+	}
+
+} 
